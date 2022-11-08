@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue_表单与v-model</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app1">
+        <p>------------------------------------ input text -----------------------------------</p>
+        <input type="text" v-model="message" placeholder="输入..."></input>
+        <p>输入的内容为: {{message}}</p>
+        
+        <p>------------------------------------ textarea -----------------------------------</p>
+        <textarea v-model="text" placeholder="输入..."></textarea>
+        <p style="white-space: pre;">输入的内容为: {{text}}</p>
+        
+        <p>------------------------------------ 单选按钮 -----------------------------------</p>
+        <!-- 单选按钮 id value v-model 共同使用! -->
+        <input type="radio" v-model="picked" value="html" id="html"></input>
+        <label for="html">HTML</label>
+
+        <input type="radio" v-model="picked" value="js" id="js"></input>
+        <label for="js">JavaScript</label>
+
+        <input type="radio" v-model="picked" value="css" id="css"></input>
+        <label for="css">CSS</label>
+        <p>单选按钮选中的为: {{picked}}</p>
+
+        <p>------------------------------------ 多选按钮 -----------------------------------</p>
+        <!-- 复选框 -->
+        <input type="checkbox" v-model="checked" value="html" id="html"></input>
+        <label for="html">HTML</label>
+
+        <input type="checkbox" v-model="checked" value="js" id="js"></input>
+        <label for="js">JavaScript</label>
+
+        <input type="checkbox" v-model="checked" value="css" id="css"></input>
+        <label for="css">CSS</label>
+        <p>多选按钮选中的为: {{checked}}</p>
+
+        <p>------------------------------------ 单选列表 -----------------------------------</p>
+        <!-- 单选列表 -->
+        <select v-model="selected">
+            <option>html</option>
+            <option value="js">javascript</option>
+            <option>css</option>
+        </select>
+        <p>单选列表选中的为: {{selected}}</p>
+
+        <p>------------------------------------ 多选列表 -----------------------------------</p>
+        <!-- 多选列表 -->
+        <select v-model="mselected" multiple>
+            <option>html</option>
+            <option value="js">javascript</option>
+            <option>css</option>
+        </select>
+        <p>多选列表选中的为: {{mselected}}</p>
+
+        <select v-model="subjects" multiple>
+            <option v-for="subject in options" :value="subject.value">{{subject.name}}</option>
+        </select>
+    </div>
+
+    <div id="app2">
+        <p>------------------------------------ 单选绑定值 --------------------------------------</p>
+        <input type="radio" v-model="picked" :value="value"></input> 
+        <label>单选按钮</label>
+        <span>{{picked}}</span> &nbsp;&nbsp;
+        <span>{{value}}</span>
+
+        <p>------------------------------------ 多选绑定值 --------------------------------------</p>
+        <input type="checkbox" v-model="toggle" :true-value="value1" :false-value="value2"></input> 
+        <label>多选按钮</label>
+        <span>{{toggle}}</span> &nbsp;&nbsp;
+        <span>{{value1}}</span> &nbsp;&nbsp;
+        <span>{{value2}}</span>
+        <p>------------------------------------ 单选下拉绑定值 -----------------------------------</p>
+        <select v-model="selected">
+            <option :value="{'nubmer' : 123}">123</option>
+        </select>
+        <span>{{selected.nubmer}}</span>
+        
+
+    </div>
+
+    <script>
+        const app1 = new Vue({
+            el: '#app1',
+            data: {
+                message: '',
+                text: '',
+                picked: 'html', // 单选按钮
+                checked: [],    // 多选按钮
+                selected: 'html', // 单选下拉
+                mselected: [],    // 多选下拉
+                subjects: [],
+                options: [
+                    {
+                        name: 'html',
+                        value: 'html'
+                    },
+                    {
+                        name: 'javascript',
+                        value: 'js'
+                    },
+                    {
+                        name: 'css',
+                        value: 'css'
+                    },
+                ]
+            }
+        });
+
+        const app2 = new Vue({
+            el: '#app2',
+            data: {
+                picked: true,
+                value: 123,
+                toggle: 'abc',
+                value1: 'yang_true',
+                value2: 'wang_false',
+                selected: ''
+            }
+        });
+    </script>
+
+</body>
+
+</html>
